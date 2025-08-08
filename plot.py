@@ -1,8 +1,33 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv(r"data\GoldStandards_H24013_03.csv") #create data frame by reading csv
+'''
+create function to select what data chart to use, should return the possbile values to plot
+create function to plot one thing vs another, with optional smoothing
+'''
+df = None
 
+def select():
+    inp = ""
+    while True:
+        inp = input("What LBNP Standard CSV would you like to plot: ")
+        try:
+            df = pd.read_csv(fr"{inp}")
+            break
+        except FileNotFoundError:
+            print("Invalid File Selected. Please try again!")         
+    print("Sucess!")
+
+    options = df.columns.drop(['Time','Labchart_LBNP', 'Time (s)'])
+    print("Your available plot options are: ")
+    for col in options:
+        print(f"- {col}")
+
+
+
+
+#df = pd.read_csv(r"data\GoldStandards_H24013_03.csv") #create data frame by reading csv
+'''
 #fill in missing values
 df.ffill(inplace=True)  #carry last know value forward
 df.bfill(inplace=True)  #carry next known value backward for any remaining missing values
@@ -28,3 +53,4 @@ fig.tight_layout()
 
 #print plot
 plt.show()
+'''
