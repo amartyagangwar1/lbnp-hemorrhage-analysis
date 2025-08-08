@@ -3,28 +3,32 @@ import matplotlib.pyplot as plt
 
 '''
 create function to select what data chart to use, should return the possbile values to plot
-create function to plot one thing vs another, with optional smoothing
-            #df['Labchart_SV'] = df['Labchart_SV'].rolling(window=10).mean()
+create function to plot one thing vs another
 create option for functions to be silent, values passed in
 '''
 
 df = None
 options = []
 
-def select():
+def select(filepath=None):
     global df, options
 
-    
-    inp = ""
-    while True:
-        inp = input("What LBNP Standard CSV would you like to plot: ")
-        try:
-            df = pd.read_csv(fr"{inp}")
-            break
-        except FileNotFoundError:
-            print("Invalid File Selected. Please try again!")         
-    print("Sucess! \n")
+    if filepath is None:
+        inp = ""
+        while True:
+            inp = input("What LBNP Standard CSV would you like to plot: ")
+            try:
+                df = pd.read_csv(fr"{inp}")
+                break
+            except FileNotFoundError:
+                print("Invalid File Selected. Please try again!")         
+        print("Sucess! \n")
+    else:
+        df = pd.read_csv(filepath)
+    choices()
 
+def choices():
+    global options, df
     options = df.columns.drop(['Time','Labchart_LBNP', 'Time (s)']).tolist()
     print("Your available plot options are: ")
     i = 0
@@ -33,21 +37,24 @@ def select():
         i += 1
 
 
-def plot():
+def plot(selected_Index = None):
     global df, options
 
-    inp = ""
-    while True:
-        inp = input("What index would you like to plot: ")
-        try:
-            indx = int(inp)
-            if indx >= 0 and indx <= (len(options) -1):
-                inp = options[indx]
-                break
-            else:
-                raise ValueError
-        except:
-            print("Invalid Input. Please try again using a valid index number!")   
+    if selected_Index is None:
+        inp = ""
+        while True:
+            inp = input("What index would you like to plot: ")
+            try:
+                indx = int(inp)
+                if indx >= 0 and indx <= (len(options) -1):
+                    inp = options[indx]
+                    break
+                else:
+                    raise ValueError
+            except:
+                print("Invalid Input. Please try again using a valid index number!")   
+    else:
+        inp = options[selected_Index]
 
 
     #fill in missing values
