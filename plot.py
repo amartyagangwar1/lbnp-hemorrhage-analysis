@@ -1,12 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-'''
-create function to select what data chart to use, should return the possbile values to plot
-create function to plot one thing vs another
-create option for functions to be silent, values passed in
-'''
-
 df = None
 options = []
 
@@ -63,9 +57,9 @@ def plot(selected_Index = None):
 
     #create figure and axis to plot left y axis
     fig, ax1 = plt.subplots()
-    ax1.plot(df['Time (s)'], df[inp], color='blue')      #REPLACE TO PLOT SOMETHING ELSE
+    ax1.plot(df['Time (s)'], df[inp], color='blue')      
     ax1.set_xlabel('Time (s)')
-    ax1.set_ylabel(inp, color='blue')                                #CHANGE LABEL
+    ax1.set_ylabel(inp, color='blue')                                
 
     #create second y axis to plot LBNP
     ax2 = ax1.twinx()
@@ -73,7 +67,7 @@ def plot(selected_Index = None):
     ax2.set_ylabel('LBNP Pressure', color='red')
 
     #set title / grid / cleanup
-    plt.title(f"{inp} & LBNP Pressure Over Time")                         #CHANGE LABEL
+    plt.title(f"{inp} & LBNP Pressure Over Time")                         
     plt.grid(True, which='both', linestyle='--', linewidth=0.5)
     fig.tight_layout()
 
