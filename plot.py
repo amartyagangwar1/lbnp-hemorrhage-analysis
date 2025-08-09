@@ -1,8 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-#Updated 8/8/25 @ 6:51
-
 df = None
 options = []
 
@@ -76,3 +74,5 @@ def plot(selected_Index = None):
     #print plot
     plt.show()
     
+
+#Updated 8/8/25 @ 07:07
