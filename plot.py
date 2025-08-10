@@ -19,7 +19,6 @@ def select(filepath=None):
         print("Sucess! \n")
     else:
         df = pd.read_csv(filepath)
-    choices()
 
 def choices():
     global options, df
@@ -74,5 +73,7 @@ def plot(selected_Index = None):
     #print plot
     plt.show()
     
+def file():
+    return df 
 
 #Updated 8/8/25 @ 07:07
